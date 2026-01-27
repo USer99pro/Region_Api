@@ -26,7 +26,7 @@ export const getCountryByCode = (code) => {
 export const getWikiSummary = async (countryName) => {
   try {
     const res = await fetch(
-      `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(
+      `https://th.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(
         countryName
       )}`
     );

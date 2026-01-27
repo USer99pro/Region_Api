@@ -1,18 +1,17 @@
-import { Link } from 'react-router-dom';
-import ThemeToggle from './ThemeToggle';
+import SearchBar from "./SearchBar";
+import ThemeToggle from "./ThemeToggle";
 
-export default function Navbar() {
-  const currentYear = new Date().getFullYear();
-
+export default function Navbar({ search, setSearch }) {
   return (
-    <header className="header">
-      <div className="header-content">
-        <Link to="/" className="logo">
-          🌍 Country Explorer
-        </Link>
-        <ThemeToggle />
+    <nav className="sticky top-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur border-b">
+      <div className="container mx-auto px-4 py-4 flex items-center gap-4 justify-between">
+        <a href="/"><h1 className="text-2xl font-bold">🌍 Country Explorer</h1></a>
+
+        <div className="flex items-center gap-4 w-1/2">
+          <SearchBar value={search} onChange={setSearch} />
+          <ThemeToggle />
+        </div>
       </div>
-   
-    </header>
+    </nav>
   );
 }

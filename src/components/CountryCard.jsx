@@ -10,15 +10,15 @@ export default function CountryCard({ country }) {
         className="country-flag"
       />
       <div className="country-info">
-        <h3 className="country-name">{country.name.common}</h3>
+        <h3 className="country-name">{ country.name.common}</h3>
         <div className="country-detail">
-          <strong>Population:</strong> {country.population.toLocaleString()}
+          <strong>ประชากร :</strong> {country.population.toLocaleString()}
         </div>
         <div className="country-detail">
-          <strong>Region:</strong> {country.region}
+          <strong>ทวีป :</strong> {country.region}
         </div>
         <div className="country-detail">
-          <strong>Capital:</strong> {country.capital?.[0] || 'N/A'}
+          <strong>เมืองหลวง :</strong> {country.capital?.[0] || 'N/A'}
         </div>
       </div>
     </Link>

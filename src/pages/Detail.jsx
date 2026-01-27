@@ -5,209 +5,193 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 
-// Fix for default marker icon in React Leaflet
+// Fix Leaflet marker icon
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
-  iconRetinaUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png",
-  iconUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png",
-  shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
+  iconRetinaUrl:
+    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png",
+  iconUrl:
+    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png",
+  shadowUrl:
+    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
 });
-
 
 export default function Detail() {
   const { code } = useParams();
   const nav = useNavigate();
+
   const [country, setCountry] = useState(null);
   const [wiki, setWiki] = useState(null);
   const [borderCountries, setBorderCountries] = useState([]);
   const [loading, setLoading] = useState(true);
 
-
   useEffect(() => {
     setLoading(true);
+
     getCountryByCode(code)
       .then((res) => {
         const data = res.data;
-        if (!data) {
-          console.error("Country data not found");
-          setLoading(false);
-          return;
-        }
         setCountry(data);
-        
-        // Fetch Wikipedia summary
-        getWikiSummary(data.name.common)
-          .then(setWiki)
-          .catch((err) => console.error("Wikipedia error:", err));
 
-        // Fetch border countries information
-        if (data.borders && data.borders.length > 0) {
+        // Wikipedia
+        getWikiSummary(data.name.common).then(setWiki).catch(console.error);
+
+        // Borders
+        if (data.borders?.length) {
           Promise.all(
-            data.borders.map((borderCode) =>
-              getCountryByCode(borderCode).then((res) => res.data)
-            )
-          )
-            .then(setBorderCountries)
-            .catch((err) => console.error("Border countries error:", err));
+            data.borders.map((c) => getCountryByCode(c).then((r) => r.data)),
+          ).then(setBorderCountries);
         }
-        
+
         setLoading(false);
       })
-      .catch((error) => {
-        console.error("Error fetching country:", error);
-        setLoading(false);
-      });
+      .catch(() => setLoading(false));
   }, [code]);
-
 
   if (loading || !country) {
     return (
-      <div className="loading-container">
-        <div className="spinner"></div>
-        <p className="loading-text">Loading country details...</p>
+      <div
+        className="min-h-screen flex flex-col items-center justify-center
+                      bg-bgLight text-textLight
+                      dark:bg-bgDark dark:text-textDark"
+      >
+        <div className="animate-spin h-10 w-10 rounded-full border-4 border-gray-300 border-t-transparent" />
+        <p className="mt-4">Loading country details...</p>
       </div>
     );
   }
 
-  // Extract native name
   const nativeName = country.name.nativeName
     ? Object.values(country.name.nativeName)[0]?.common
     : country.name.common;
 
-  // Extract currencies
   const currencies = country.currencies
     ? Object.values(country.currencies)
         .map((c) => `${c.name} (${c.symbol})`)
         .join(", ")
     : "N/A";
 
-  // Extract languages
   const languages = country.languages
     ? Object.values(country.languages).join(", ")
     : "N/A";
 
-
   return (
-    <div className="detail-container fade-in">
-      <button onClick={() => nav(-1)} className="btn btn-secondary btn-back">
-        ← Back
-      </button>
-
-      <div className="detail-header">
+    <div
+      className="min-h-screen px-6 py-8
+                    bg-bgLight text-textLight
+                    dark:bg-bgDark dark:text-textDark animate-fade"
+    >
+      {/* Header */}
+      <div className="grid gap-10 md:grid-cols-2 items-center">
         <img
-          src={country.flags.svg || country.flags.png}
-          alt={`Flag of ${country.name.common}`}
-          className="detail-flag"
+          src={country.flags.svg}
+          alt={country.name.common}
+          className="w-full max-w-md rounded shadow-soft"
         />
-        <div className="detail-info">
-          <h1 className="detail-title">{country.name.common}</h1>
-          
-          <div className="info-grid">
-            <div className="info-item">
-              <div className="info-label">Native Name</div>
-              <div className="info-value">{nativeName}</div>
+
+        <div>
+          <h1 className="text-3xl font-extrabold mb-6">
+            {country.name.common}
+          </h1>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+            <div>
+              <b>Native Name:</b> {nativeName}
             </div>
-            
-            <div className="info-item">
-              <div className="info-label">Population</div>
-              <div className="info-value">{country.population.toLocaleString()}</div>
+            <div>
+              <b>Population:</b> {country.population.toLocaleString()}
             </div>
-            
-            <div className="info-item">
-              <div className="info-label">Region</div>
-              <div className="info-value">{country.region}</div>
+            <div>
+              <b>Region:</b> {country.region}
             </div>
-            
-            <div className="info-item">
-              <div className="info-label">Sub Region</div>
-              <div className="info-value">{country.subregion || "N/A"}</div>
+            <div>
+              <b>Sub Region:</b> {country.subregion || "N/A"}
             </div>
-            
-            <div className="info-item">
-              <div className="info-label">Capital</div>
-              <div className="info-value">{country.capital?.[0] || "N/A"}</div>
+            <div>
+              <b>Capital:</b> {country.capital?.[0] || "N/A"}
             </div>
-            
-            <div className="info-item">
-              <div className="info-label">Currencies</div>
-              <div className="info-value">{currencies}</div>
+            <div>
+              <b>Currencies:</b> {currencies}
             </div>
-            
-            <div className="info-item">
-              <div className="info-label">Languages</div>
-              <div className="info-value">{languages}</div>
+            <div>
+              <b>Languages:</b> {languages}
             </div>
-            
-            <div className="info-item">
-              <div className="info-label">Area</div>
-              <div className="info-value">{country.area ? country.area.toLocaleString() : 'N/A'} km²</div>
+            <div>
+              <b>Area:</b> {country.area?.toLocaleString()} km²
             </div>
           </div>
         </div>
       </div>
 
-      {/* Border Countries */}
-      {borderCountries.length > 0 && (
-        <div className="border-countries">
-          <h3>🗺️ Border Countries</h3>
-          <div className="border-list">
-            {borderCountries.map((borderCountry) => (
-              <Link
-                key={borderCountry.cca3}
-                to={`/country/${borderCountry.cca3}`}
-                className="border-country-link"
+      {/* Map + Wikipedia */}
+      {country.latlng && wiki?.extract && (
+        <div className="mt-14 grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
+          {/* Map (Left) */}
+          <div>
+            <h3 className="font-semibold mb-4">📍 Location</h3>
+            <div className="h-[380px] rounded-xl overflow-hidden shadow-soft">
+              <MapContainer
+                center={country.latlng}
+                zoom={5}
+                className="h-full w-full"
+                scrollWheelZoom={false}
               >
-                {borderCountry.name.common}
-              </Link>
-            ))}
+                <TileLayer
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                  attribution="&copy; OpenStreetMap contributors"
+                />
+                <Marker position={country.latlng}>
+                  <Popup>
+                    <strong>{country.name.common}</strong>
+                    <br />
+                    {country.capital?.[0]}
+                  </Popup>
+                </Marker>
+              </MapContainer>
+            </div>
+          </div>
+
+          {/* Wikipedia (Right) */}
+          <div className=""> 
+            <h3 className="font-semibold mb-4 ">
+              📖 About {country.name.common}
+            </h3>
+
+            <p className="leading-relaxed opacity-90">{wiki.extract}</p>
+
+            {wiki?.content_urls?.desktop?.page && (
+              <a
+                href={wiki.content_urls.desktop.page}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-block mt-4 font-semibold hover:underline"
+              >
+                Read more on Wikipedia →
+              </a>
+            )}
           </div>
         </div>
       )}
 
-      {/* Interactive Map */}
-      {country.latlng && country.latlng.length === 2 && (
-        <div className="map-section">
-          <h3>📍 Location</h3>
-          <div className="map-container">
-            <MapContainer
-              center={country.latlng}
-              zoom={5}
-              style={{ height: "100%", width: "100%" }}
-              scrollWheelZoom={false}
-            >
-              <TileLayer
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              />
-              <Marker position={country.latlng}>
-                <Popup>
-                  <strong>{country.name.common}</strong>
-                  <br />
-                  {country.capital?.[0] && `Capital: ${country.capital[0]}`}
-                </Popup>
-              </Marker>
-            </MapContainer>
-          </div>
-        </div>
-      )}
-
-      {/* Wikipedia Summary */}
-      {wiki && wiki.extract && (
-        <div className="wiki-section">
-          <h3>📖 About {country.name.common}</h3>
-          <p className="wiki-content">{wiki.extract}</p>
-          {wiki.content_urls && wiki.content_urls.desktop && (
-            <a
-              href={wiki.content_urls.desktop.page}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="wiki-link"
-            >
-              Read more on Wikipedia →
-            </a>
-          )}
-        </div>
-      )}
+      {/* Back Button (Bottom) */}
+      <div className="mt-16 flex justify-center">
+        <button
+          onClick={() => nav(-1)}
+          className="
+      inline-flex items-center gap-2
+      px-8 py-3
+      rounded-xl
+      font-semibold
+      shadow-soft
+      border-r-4 border-b-4 border-gray-300/50 bg-amber-100
+      bg-elementLight text-textLight
+      dark:bg-elementDark dark:text-textDark
+      hover:scale-105 transition 
+    "
+        >
+          ← Back to Countries
+        </button>
+      </div>
     </div>
   );
 }

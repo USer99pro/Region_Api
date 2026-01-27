@@ -1,17 +1,21 @@
-import { useContext } from 'react';
-import { ThemeContext } from '../Contexts/ThemeContext';
+import { useContext } from "react";
+import { ThemeContext } from "../Contexts/ThemeContext";
 
 export default function ThemeToggle() {
-  const { dark, setDark } = useContext(ThemeContext);
+  const ctx = useContext(ThemeContext);
+
+  console.log("THEME CONTEXT:", ctx);
+
+  if (!ctx) return null;
+
+  const { dark, setDark } = ctx;
 
   return (
     <button
-      className="theme-toggle"
       onClick={() => setDark(!dark)}
-      aria-label="Toggle theme"
-      title={dark ? 'Switch to light mode' : 'Switch to dark mode'}
+      className="px-3 py-2 rounded bg-gray-200 dark:bg-gray-700"
     >
-      {dark ? '☀️' : '🌙'}
+      {dark ? "☀️" : "🌙"}
     </button>
   );
 }

@@ -40,14 +40,14 @@ export default function Home({ search }) {
     return Object.values(regionMap)
       .filter((r) => r.name !== "Unknown")
       .sort((a, b) => b.count - a.count)
-      .slice(0, 20);
+      .slice(0, 10);
   }, [countries]);
 
   /* ==========================
      FILTER COUNTRIES
   ========================== */
   const filtered = useMemo(() => {
-    if (!search) return countries.slice(0, 10);
+    if (!search) return countries.slice(0, 20);
 
     return countries.filter((c) =>
       c.name.common.toLowerCase().includes(search.toLowerCase()),
@@ -68,25 +68,63 @@ export default function Home({ search }) {
 
   return (
     <div
-      className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-slate-900 dark:via-slate-800 dark:to-indigo-950">
-      <div className="container mx-auto px-4 py-10">
-
-
+      className=" dark
+      min-h-screen
+      bg-gradient-to-br
+      from-slate-50 via-blue-50 to-indigo-50
+      dark:from-slate-900 dark:via-slate-800 dark:to-indigo-950
+      transition-colors duration-300
+    "
+    >
+      <div className="container mx-auto py-10">
         {/* =======================
-            COUNTRIES RESULT
-        ======================= */}
+          COUNTRIES RESULT
+      ======================= */}
         <section
-          className="bg-white dark:bg-slate-800 rounded-3xl shadow-xl
-                            p-8 border border-slate-200 dark:border-slate-700"
+          className="
+          bg-white dark:bg-slate-800
+          rounded-3xl
+          shadow-xl
+          p-6 md:p-8
+          border border-slate-200 dark:border-slate-700
+          transition-all duration-300
+        "
         >
+       
+
+          {/* Empty State */}
           {filtered.length === 0 ? (
-            <p className="text-center py-16 text-slate-500">
-              No countries found for <b>"{search}"</b>
-            </p>
+            <div className="py-20 text-center">
+              <p className="text-lg text-slate-500 dark:text-slate-400">
+                No countries found for
+              </p>
+              <p className="mt-2 text-xl font-semibold text-slate-700 dark:text-slate-200">
+                “{search}”
+              </p>
+            </div>
           ) : (
-            <div className="countries-grid">
+            <div
+              className="
+              grid
+              grid-cols-1
+              sm:grid-cols-2
+              md:grid-cols-3
+              lg:grid-cols-4
+              xl:grid-cols-5
+              gap-3
+            "
+            >
               {filtered.map((c) => (
-                <CountryCard key={c.cca3} country={c} />
+                <div
+                  key={c.cca3}
+                  className="
+                  transition
+                  hover:-translate-y-2
+                  hover:shadow-2xl
+                "
+                >
+                  <CountryCard country={c} />
+                </div>
               ))}
             </div>
           )}

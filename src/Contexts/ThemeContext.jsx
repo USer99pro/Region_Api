@@ -1,28 +1,27 @@
-import { createContext, useState, useEffect } from "react";
-export const ThemeContext = createContext();
+import { createContext, useEffect, useState } from "react";
 
+export const ThemeContext = createContext(null);
 
-export const ThemeProvider = ({ children }) => {
-  // Initialize theme from localStorage or default to false (light mode)
+export function ThemeProvider({ children }) {
   const [dark, setDark] = useState(() => {
-    const saved = localStorage.getItem('theme');
-    return saved === 'dark';
+    return localStorage.getItem("theme") === "dark";
   });
 
-  // Persist theme preference to localStorage
   useEffect(() => {
-    localStorage.setItem('theme', dark ? 'dark' : 'light');
-    // Update document class for global styling
+    const html = document.documentElement;
+
     if (dark) {
-      document.documentElement.classList.add('dark');
+      html.classList.add("dark");
+      localStorage.setItem("theme", "dark");
     } else {
-      document.documentElement.classList.remove('dark');
+      html.classList.remove("dark");
+      localStorage.setItem("theme", "light");
     }
   }, [dark]);
 
   return (
     <ThemeContext.Provider value={{ dark, setDark }}>
-      <div className={dark ? "dark" : ""}>{children}</div>
+      {children}
     </ThemeContext.Provider>
   );
-};
+}

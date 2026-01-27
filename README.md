@@ -1,6 +1,11 @@
 # Region API Project
-
 A modern React application built with Vite and Tailwind CSS that allows users to explore countries and regions.
+## Deploy With Vercel
+
+You can view the live deployment here:
+
+[region-api-one.vercel.app](https://region-n9bbdltpw-user99pros-projects.vercel.app/)
+
 
 ## About Project
 
@@ -25,9 +30,3 @@ The project structure is organized as follows:
 - **`index.html`**: Entry HTML file.
 - **`vite.config.js`**: Configuration for Vite.
 - **`tailwind.config.js`**: Configuration for Tailwind CSS.
-
-## Deploy With Vercel
-
-You can view the live deployment here:
-
-[region-api-one.vercel.app](https://region-n9bbdltpw-user99pros-projects.vercel.app/)

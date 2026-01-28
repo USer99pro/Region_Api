@@ -1,10 +1,14 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState, useCallback } from "react";
 
 /**
  * ThemeContext
  * ใช้สำหรับจัดการ Dark / Light Mode ทั้งระบบ
  */
-export const ThemeContext = createContext(null);
+export const ThemeContext = createContext({
+  dark: false,
+  setDark: () => {},
+  toggle: () => {},
+});
 
 export function ThemeProvider({ children }) {
   /**
@@ -13,9 +17,20 @@ export function ThemeProvider({ children }) {
    * false = light mode
    */
   const [dark, setDark] = useState(() => {
-    const stored = localStorage.getItem("theme");
-    return stored === "dark";
+    try {
+      const stored = localStorage.getItem("theme");
+      if (stored) return stored === "dark";
+      return (
+        typeof window !== "undefined" &&
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches
+      );
+    } catch {
+      return false;
+    }
   });
+
+  const toggle = useCallback(() => setDark((prev) => !prev), []);
 
   /**
    * effect: sync theme กับ <html> และ localStorage
@@ -36,7 +51,7 @@ export function ThemeProvider({ children }) {
    * Provider
    */
   return (
-    <ThemeContext.Provider value={{ dark, setDark }}>
+    <ThemeContext.Provider value={{ dark, setDark, toggle }}>
       {children}
     </ThemeContext.Provider>
   );

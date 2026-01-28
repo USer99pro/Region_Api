@@ -68,7 +68,7 @@ export default function Home({ search }) {
 
   return (
     <div
-      className=" dark
+      className=" 
       min-h-screen
       bg-gradient-to-br
       from-slate-50 via-blue-50 to-indigo-50

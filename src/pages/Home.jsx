@@ -60,76 +60,45 @@ export default function Home({ search }) {
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen">
-        <div className="spinner mb-4"></div>
+        <div className="mb-4 spinner"></div>
         <p className="text-slate-500">Loading countries...</p>
       </div>
     );
   }
 
   return (
-    <div
-      className=" 
-      min-h-screen
-      bg-gradient-to-br
-      from-slate-50 via-blue-50 to-indigo-50
-      dark:from-slate-900 dark:via-slate-800 dark:to-indigo-950
-      transition-colors duration-300
-    "
-    >
-      <div className="container mx-auto py-10">
-        {/* =======================
+    // <html className={loading ? "" : "dark"}>
+      <div className="min-h-screen transition-colors duration-300 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-slate-900 dark:via-slate-800 dark:to-indigo-950">
+        <div className="container py-10 mx-auto ">
+          {/* =======================
           COUNTRIES RESULT
       ======================= */}
-        <section
-          className="
-          bg-white dark:bg-slate-800
-          rounded-3xl
-          shadow-xl
-          p-6 md:p-8
-          border border-slate-200 dark:border-slate-700
-          transition-all duration-300
-        "
-        >
-       
-
-          {/* Empty State */}
-          {filtered.length === 0 ? (
-            <div className="py-20 text-center">
-              <p className="text-lg text-slate-500 dark:text-slate-400">
-                No countries found for
-              </p>
-              <p className="mt-2 text-xl font-semibold text-slate-700 dark:text-slate-200">
-                “{search}”
-              </p>
-            </div>
-          ) : (
-            <div
-              className="
-              grid
-              grid-cols-1
-              sm:grid-cols-2
-              md:grid-cols-3
-              lg:grid-cols-4
-              xl:grid-cols-5
-              gap-3
-            "
-            >
-              {filtered.map((c) => (
-                <div
-                  key={c.cca3}
-                  className="
-                  transition
-                  hover:-translate-y-2
-                  hover:shadow-2xl
-                "
-                >
-                  <CountryCard country={c} />
-                </div>
-              ))}
-            </div>
-          )}
-        </section>
+          <section className="p-6 transition-all duration-300 bg-white border shadow-xl dark:bg-slate-800 rounded-3xl md:p-8 border-slate-200 dark:border-slate-700">
+            {/* Empty State */}
+            {filtered.length === 0 ? (
+              <div className="py-20 text-center">
+                <p className="text-lg text-slate-500 dark:text-slate-400">
+                  No countries found for
+                </p>
+                <p className="mt-2 text-xl font-semibold text-slate-700 dark:text-slate-200">
+                  “{search}”
+                </p>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+                {filtered.map((c) => (
+                  <div
+                    key={c.cca3}
+                    className="transition hover:-translate-y-2 hover:shadow-2xl"
+                  >
+                    <CountryCard country={c} />
+                  </div>
+                ))}
+              </div>
+            )}
+          </section>
+        </div>
       </div>
-    </div>
+    // </html>
   );
 }

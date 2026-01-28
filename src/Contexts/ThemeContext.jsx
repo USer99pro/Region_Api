@@ -1,21 +1,9 @@
 import { createContext, useEffect, useState, useCallback } from "react";
 
-/**
- * ThemeContext
- * ใช้สำหรับจัดการ Dark / Light Mode ทั้งระบบ
- */
-export const ThemeContext = createContext({
-  dark: false,
-  setDark: () => {},
-  toggle: () => {},
-});
+export const ThemeContext = createContext(null);
 
 export function ThemeProvider({ children }) {
-  /**
-   * state: dark
-   * true  = dark mode
-   * false = light mode
-   */
+
   const [dark, setDark] = useState(() => {
     try {
       const stored = localStorage.getItem("theme");

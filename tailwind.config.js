@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  darkMode: "class", // ✅ สำคัญ
+    darkMode: "class",
   content: ["./index.html", "./src/**/*.{js,jsx}"],
   theme: {
     

@@ -1,4 +1,8 @@
 # 🌍 Country Explorer
+## 🚀 Live Demo
+
+**[View Live Deployment →](https://region-api-git-main-user99pros-projects.vercel.app/)**
+
 ## ✨ Features
 
 - **Country Grid** — Browse all countries with flags, population, region, and capital
@@ -9,9 +13,7 @@
 - **Dark/Light Theme** — Toggle between themes with smooth transitions
 - **Responsive Design** — Works on desktop, tablet, and mobile
 
-## 🚀 Live Demo
 
-**[View Live Deployment →](https://region-api-git-main-user99pros-projects.vercel.app/)**
 
 ## 🛠 Tech Stack
 

@@ -1,9 +1,4 @@
 # 🌍 Country Explorer
-
-
-
-![Project Preview](<img width="1900" height="872" alt="Screenshot 2026-02-01 191702" src="https://github.com/user-attachments/assets/957b1f71-4d6c-4fb5-90be-7a4396628f18" />)
-
 ## ✨ Features
 
 - **Country Grid** — Browse all countries with flags, population, region, and capital
@@ -49,8 +44,6 @@ Open [http://localhost:5173](http://localhost:5173) in your browser.
 | Command | Description |
 |---------|-------------|
 | `npm run dev` | Start development server |
-| `npm run build` | Build for production |
-| `npm run preview` | Preview production build |
 | `npm run lint` | Run ESLint |
 
 ## 📁 Project Structure

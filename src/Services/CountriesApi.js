@@ -8,8 +8,10 @@ export const getAllCountries = () => {
     params: {
       fields: "name,flags,cca3,region,population,capital,latlng",
     },
+
   });
 };
+
 
 // ดึงข้อมูลรายประเทศด้วย code (เช่น THA)
 export const getCountryByCode = (code) => {

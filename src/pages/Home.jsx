@@ -69,7 +69,7 @@ export default function Home({ search }) {
   return (
     <div
       className="min-h-screen
-      bg-gradient-to-br
+       bg-gradient-to-br
       from-slate-50 via-blue-50 to-indigo-50
       dark:from-slate-900 dark:via-slate-800 dark:to-indigo-950
       transition-colors duration-300

@@ -91,33 +91,33 @@ export default function Detail() {
 
         <div>
           <h1 className="text-3xl font-extrabold mb-6">
-            {country.name.common}
+          ประเทศ : {country.name.common}
           </h1>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
             <div>
-              <b>Native Name:</b> {nativeName}
+              <b>ชื่อพื้นเมือง :</b> {nativeName}
             </div>
             <div>
-              <b>Population:</b> {country.population.toLocaleString()}
+              <b>ประชากร :</b> {country.population.toLocaleString()}
             </div>
             <div>
-              <b>Region:</b> {country.region}
+              <b>ภูมิภาค :</b> {country.region}
             </div>
             <div>
-              <b>Sub Region:</b> {country.subregion || "N/A"}
+              <b>ภูมิภาคย่อย :</b> {country.subregion || "N/A"}
             </div>
             <div>
-              <b>Capital:</b> {country.capital?.[0] || "N/A"}
+              <b>เมืองหลวง :</b> {country.capital?.[0] || "N/A"}
             </div>
             <div>
-              <b>Currencies:</b> {currencies}
+              <b>สกุลเงิน :</b> {currencies}
             </div>
             <div>
-              <b>Languages:</b> {languages}
+              <b>ภาษา :</b> {languages}
             </div>
             <div>
-              <b>Area:</b> {country.area?.toLocaleString()} km²
+              <b>พื้นที่ : {country.area?.toLocaleString()} km²</b>
             </div>
           </div>
         </div>
@@ -153,8 +153,8 @@ export default function Detail() {
 
           {/* Wikipedia (Right) */}
           <div className=""> 
-            <h3 className="font-semibold mb-4 ">
-              📖 About {country.name.common}
+            <h3 className="font-semibold mb-4 text-2xl">
+              📖 เกี่ยวกับ {country.name.common}
             </h3>
 
             <p className="leading-relaxed opacity-90">{wiki.extract}</p>
@@ -189,7 +189,7 @@ export default function Detail() {
       hover:scale-105 transition 
     "
         >
-          ← Back to Countries
+          ← กลับไปที่หนัาหลัก
         </button>
       </div>
     </div>

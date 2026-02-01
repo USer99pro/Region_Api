@@ -73,23 +73,14 @@ src/
 - **[REST Countries](https://restcountries.com/)** — Country data (flags, population, region, borders, etc.)
 - **[Wikipedia REST API](https://www.mediawiki.org/wiki/API:Main_page)** — Thai Wikipedia summaries
 
-## 📸 Adding a Preview Image
 
-To add a project screenshot:
 
-1. Run the app: `npm run dev`
-2. Open [http://localhost:5173](http://localhost:5173)
-3. Take a screenshot of the home page
-4. Save it as `docs/preview.png`
 
----
-
-**Deploy with Vercel** — One-click deploy from your Git repository.
-<img width="1900" height="872" alt="Screenshot 2026-02-01 191702" src="https://github.com/user-attachments/assets/e6d225c6-1b2d-45fb-bdb1-815c4e06198f" />
 <img width="1898" height="867" alt="Screenshot 2026-02-01 185459" src="https://github.com/user-attachments/assets/ee8461cf-4213-46b3-b51b-998c65af4c99" />
 <img width="1891" height="868" alt="Screenshot 2026-02-01 185510" src="https://github.com/user-attachments/assets/23deb3b7-c6e6-4d74-8c96-40c0eb016fbd" />
+<img width="1900" height="872" alt="Screenshot 2026-02-01 191702" src="https://github.com/user-attachments/assets/e6d225c6-1b2d-45fb-bdb1-815c4e06198f" />
 <img width="1883" height="864" alt="Screenshot 2026-02-01 191713" src="https://github.com/user-attachments/assets/67cf519c-38bd-4867-8463-84ff078c11e4" />
-
+**Deploy with Vercel** — One-click deploy from your Git repository.
 
 
 

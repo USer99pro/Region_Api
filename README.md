@@ -73,7 +73,7 @@ src/
 - **[REST Countries](https://restcountries.com/)** — Country data (flags, population, region, borders, etc.)
 - **[Wikipedia REST API](https://www.mediawiki.org/wiki/API:Main_page)** — Thai Wikipedia summaries
 
-
+##🖼️ Desing Previwe
 <img width="1898" height="867" alt="Screenshot 2026-02-01 185459" src="https://github.com/user-attachments/assets/ee8461cf-4213-46b3-b51b-998c65af4c99" />
 <img width="1891" height="868" alt="Screenshot 2026-02-01 185510" src="https://github.com/user-attachments/assets/23deb3b7-c6e6-4d74-8c96-40c0eb016fbd" />
 <img width="1900" height="872" alt="Screenshot 2026-02-01 191702" src="https://github.com/user-attachments/assets/e6d225c6-1b2d-45fb-bdb1-815c4e06198f" />

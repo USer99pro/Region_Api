@@ -1,8 +1,8 @@
 # 🌍 Country Explorer
 
-A modern React web application for exploring countries around the world. Browse country data, view interactive maps, and read Wikipedia summaries—all with a beautiful dark/light theme.
 
-![Project Preview](./docs/preview.png)
+
+![Project Preview](<img width="1900" height="872" alt="Screenshot 2026-02-01 191702" src="https://github.com/user-attachments/assets/957b1f71-4d6c-4fb5-90be-7a4396628f18" />)
 
 ## ✨ Features
 
@@ -16,7 +16,7 @@ A modern React web application for exploring countries around the world. Browse 
 
 ## 🚀 Live Demo
 
-**[View Live Deployment →](https://region-n9bbdltpw-user99pros-projects.vercel.app/)**
+**[View Live Deployment →](https://region-api-git-main-user99pros-projects.vercel.app/)**
 
 ## 🛠 Tech Stack
 

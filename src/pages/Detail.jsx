@@ -52,8 +52,8 @@ export default function Detail() {
     return (
       <div
         className="min-h-screen flex flex-col items-center justify-center
-                      bg-bgLight text-textLight
-                      dark:bg-bgDark dark:text-textDark"
+                      bg-slate-50 text-slate-900
+                      dark:bg-slate-900 dark:text-slate-100"
       >
         <div className="animate-spin h-10 w-10 rounded-full border-4 border-gray-300 border-t-transparent" />
         <p className="mt-4">Loading country details...</p>
@@ -78,8 +78,8 @@ export default function Detail() {
   return (
     <div
       className="min-h-screen px-6 py-8
-                    bg-bgLight text-textLight
-                    dark:bg-bgDark dark:text-textDark animate-fade"
+                    bg-slate-50 text-slate-900
+                    dark:bg-slate-900 dark:text-slate-100 transition-colors duration-300"
     >
       {/* Header */}
       <div className="grid gap-10 md:grid-cols-2 items-center">
@@ -160,12 +160,12 @@ export default function Detail() {
             <p className="leading-relaxed opacity-90">{wiki.extract}</p>
 
             {wiki?.content_urls?.desktop?.page && (
-              <a
-                href={wiki.content_urls.desktop.page}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-block mt-4 font-semibold hover:underline"
-              >
+            <a
+              href={wiki.content_urls.desktop.page}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-block mt-4 font-semibold hover:underline text-indigo-600 dark:text-indigo-400"
+            >
                 Read more on Wikipedia →
               </a>
             )}
@@ -182,10 +182,10 @@ export default function Detail() {
       px-8 py-3
       rounded-xl
       font-semibold
-      shadow-soft
-      border-r-4 border-b-4 border-gray-300/50 bg-amber-100
-      bg-elementLight text-textLight
-      dark:bg-elementDark dark:text-textDark
+      shadow-lg
+      border-r-4 border-b-4 border-gray-300/50
+      bg-white text-slate-800
+      dark:bg-slate-800 dark:text-slate-100
       hover:scale-105 transition 
     "
         >
